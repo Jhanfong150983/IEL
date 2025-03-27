@@ -38,7 +38,7 @@
     <h1>關埔國小資訊設備管理系統</h1>
     
     <div class="map-container">
-        <img id="schoolmap_1" src="images/SchoolMap_1F.png" alt="學校平面圖">
+        <img id="schoolmap_1" src="SchoolMap_1F.png" alt="學校平面圖">
     </div>
 
     <div class="buttons">
@@ -54,7 +54,7 @@
         function updateMap() {
             mapImage.style.opacity = "0"; // 淡出效果
             setTimeout(() => {
-                mapImage.src = `images/SchoolMap_${currentFloor}F.png`;
+                mapImage.src = `SchoolMap_${currentFloor}F.png`;
                 mapImage.style.opacity = "1"; // 淡入效果
             }, 300);
         }
