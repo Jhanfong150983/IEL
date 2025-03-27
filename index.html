@@ -1,2 +1,74 @@
 # IEL
 資訊設備可視化互動網頁
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>關埔國小資訊設備管理系統</title>
+    <style>
+      /*整體設計*/
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+      /*平面圖設計*/
+        .map-container {
+            position: relative;
+            display: inline-block;
+        }
+        .map-container img {
+            max-width: 100%;
+            height: auto;
+            transition: opacity 0.5s ease-in-out;
+        }
+      /*按鈕設計*/
+        .buttons {
+            margin-top: 10px;
+        }
+        .buttons button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>關埔國小資訊設備管理系統</h1>
+    
+    <div class="map-container">
+        <img id="schoolmap_1" src="images/SchoolMap_1F.png" alt="學校平面圖">
+    </div>
+
+    <div class="buttons">
+        <button onclick="prevFloor()">上一層</button>
+        <button onclick="nextFloor()">下一層</button>
+    </div>
+
+    <script>
+        let currentFloor = 1;
+        const totalFloors = 3;
+        const mapImage = document.getElementById("school-map");
+
+        function updateMap() {
+            mapImage.style.opacity = "0"; // 淡出效果
+            setTimeout(() => {
+                mapImage.src = `images/floor-${currentFloor}.png`;
+                mapImage.style.opacity = "1"; // 淡入效果
+            }, 300);
+        }
+
+        function prevFloor() {
+            currentFloor = (currentFloor === 1) ? totalFloors : currentFloor - 1;
+            updateMap();
+        }
+
+        function nextFloor() {
+            currentFloor = (currentFloor === totalFloors) ? 1 : currentFloor + 1;
+            updateMap();
+        }
+    </script>
+
+</body>
+</html>
