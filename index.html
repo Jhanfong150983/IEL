@@ -15,10 +15,8 @@
         }
       /*平面圖設計*/
         .map-container {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            margin: auto;
+            width: 100vw;
+            height: 100vh;
             overflow: hidden;
             position: relative;
             touch-action: pan-y;
@@ -28,9 +26,9 @@
             transition: transform 0.3s ease-out;
         }
         .map-container img {
-            max-width: 100%;
-            height: auto;
-            transition: opacity 0.5s ease-in-out;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -50,38 +48,58 @@
         let currentIndex = 0;
         const totalFloors = 3;
 
+        let isDragging = false;
         let startX = 0;
         let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID;
 
         function startDrag(e) {
             startX = e.touches ? e.touches[0].clientX : e.clientX;
+            prevTranslate = currentTranslate;
+            mapWrapper.style.transition = "none"; // 取消動畫以便拖曳順暢
+            animationID = requestAnimationFrame(animation); // 開啟動畫
+        }
+
+        function dragMove(e) {
+            if (!isDragging) return;
+            let currentX = e.touches ? e.touches[0].clientX : e.clientX;
+            currentTranslate = prevTranslate + (currentX - startX);
         }
 
         function endDrag(e) {
-            let endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-            let deltaX = endX - startX;
-
-            if (deltaX > 50) {
-                // 右滑（上一層）
-                currentIndex = Math.max(0, currentIndex - 1);
-            } else if (deltaX < -50) {
-                // 左滑（下一層）
+            isDragging = false;
+            cancelAnimationFrame(animationID); // 停止動畫
+            mapWrapper.style.transition = "transform 0.3s ease-out"; // 回復動畫
+            // 根據拖曳距離決定是否切換樓層
+            let movedBy = currentTranslate - prevTranslate;
+            if (movedBy < -50) {
                 currentIndex = Math.min(totalFloors - 1, currentIndex + 1);
+            } else if (movedBy > 50) {
+                currentIndex = Math.max(0, currentIndex - 1);
             }
 
             updateSlide();
         }
-
+        
         function updateSlide() {
             currentTranslate = -currentIndex * 100;
             mapWrapper.style.transform = `translateX(${currentTranslate}%)`;
         }
 
+        function animation() {
+            mapWrapper.style.transform = `translateX(${currentTranslate}px)`;
+            if (isDragging) requestAnimationFrame(animation);
+        }
+
         // 監聽觸控 & 滑鼠事件
         mapWrapper.addEventListener("mousedown", startDrag);
-        mapWrapper.addEventListener("mouseup", endDrag);
+        window.addEventListener("mousemove", dragMove);
+        window.addEventListener("mouseup", endDrag);
+
         mapWrapper.addEventListener("touchstart", startDrag);
-        mapWrapper.addEventListener("touchend", endDrag);
+        window.addEventListener("touchmove", dragMove);
+        window.addEventListener("touchend", endDrag);
     </script>
 
 </body>
