@@ -24,14 +24,28 @@
             box-sizing: border-box;
         }
 
-        .map {
-            max-width: 90vw;
-            max-height: 90vh;
-        }
-        .map-container img {
+        .map-wrapper {
+            position: relative;
             width: 90vw;
             height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .map-wrapper img {
+            width: 100%;
+            height: 100%;
             object-fit: contain;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* 預設只顯示第一張圖 */
+        .map-wrapper img:not(:first-child) {
+            display: none;
         }
     </style>
 </head>
@@ -45,8 +59,29 @@
             <img src="SchoolMap_3F.png" alt="3樓">
         </div>
     </div>
+    
     <script>
-       
+        let currentFloor = 0; // 預設顯示第 1 張圖（index 0）
+        const images = document.querySelectorAll(".map-wrapper img");
+
+        function showFloor(floor) {
+            images.forEach((img, index) => {
+            img.style.display = index === floor ? "block" : "none";
+            });
+        }
+
+        // 測試切換樓層（可綁定按鈕事件）
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowUp") {
+                currentFloor = Math.min(currentFloor + 1, images.length - 1);
+            } else if (event.key === "ArrowDown") {
+                currentFloor = Math.max(currentFloor - 1, 0);
+            }
+            showFloor(currentFloor);
+        });
+
+        // 初始化（確保只有第一層顯示）
+        showFloor(currentFloor);
     </script>
 
 </body>
