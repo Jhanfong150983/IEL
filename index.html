@@ -33,57 +33,6 @@
             height: 90vh;
             object-fit: contain;
         }
-        /*按鈕*/
-        .nav-button {
-        position: absolute;
-        top: 0;
-        width: 10%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.3); /* 半透明 */
-        opacity: 0; /* 預設隱藏 */
-        transition: opacity 0.3s;
-        cursor: pointer;
-        }
-
-        /* 滑鼠靠近時顯示按鈕 */
-        .map-container:hover .nav-button {
-        opacity: 1;
-        }
-
-        /* 左按鈕 */
-        .nav-button.left {
-        left: 0;
-        }
-
-        /* 右按鈕 */
-        .nav-button.right {
-        right: 0;
-        }
-
-        const mapWrapper = document.querySelector(".map-wrapper");
-        let currentIndex = 0;
-        const totalFloors = 3;
-
-        // 切換到上一樓層
-        function prevFloor() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateSlide();
-            }
-        }
-
-        // 切換到下一樓層
-        function nextFloor() {
-            if (currentIndex < totalFloors - 1) {
-            currentIndex++;
-            updateSlide();
-            }
-        }
-
-        // 更新圖片位置
-        function updateSlide() {
-        mapWrapper.style.transform = `translateX(-${currentIndex * 100}vw)`;
-}
     </style>
 </head>
 <body>
@@ -95,68 +44,9 @@
             <img src="SchoolMap_2F.png" alt="2樓">
             <img src="SchoolMap_3F.png" alt="3樓">
         </div>
-        <!-- 左側按鈕 -->
-        <div class="nav-button left" onclick="prevFloor()"></div>
-        <!-- 右側按鈕 -->
-        <div class="nav-button right" onclick="nextFloor()"></div>
     </div>
     <script>
-        const mapWrapper = document.querySelector(".map-wrapper");
-        let currentIndex = 0;
-        const totalFloors = 3;
-
-        let isDragging = false;
-        let startX = 0;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
-        let animationID;
-
-        function startDrag(e) {
-            startX = e.touches ? e.touches[0].clientX : e.clientX;
-            prevTranslate = currentTranslate;
-            mapWrapper.style.transition = "none"; // 取消動畫以便拖曳順暢
-            animationID = requestAnimationFrame(animation); // 開啟動畫
-        }
-
-        function dragMove(e) {
-            if (!isDragging) return;
-            let currentX = e.touches ? e.touches[0].clientX : e.clientX;
-            currentTranslate = prevTranslate + (currentX - startX);
-        }
-
-        function endDrag(e) {
-            isDragging = false;
-            cancelAnimationFrame(animationID); // 停止動畫
-            mapWrapper.style.transition = "transform 0.3s ease-out"; // 回復動畫
-            // 根據拖曳距離決定是否切換樓層
-            let movedBy = currentTranslate - prevTranslate;
-            if (movedBy < -50) {
-                currentIndex = Math.min(totalFloors - 1, currentIndex + 1);
-            } else if (movedBy > 50) {
-                currentIndex = Math.max(0, currentIndex - 1);
-            }
-
-            updateSlide();
-        }
-        
-        function updateSlide() {
-            currentTranslate = -currentIndex * 100;
-            mapWrapper.style.transform = `translateX(${currentTranslate}%)`;
-        }
-
-        function animation() {
-            mapWrapper.style.transform = `translateX(${currentTranslate}px)`;
-            if (isDragging) requestAnimationFrame(animation);
-        }
-
-        // 監聽觸控 & 滑鼠事件
-        mapWrapper.addEventListener("mousedown", startDrag);
-        window.addEventListener("mousemove", dragMove);
-        window.addEventListener("mouseup", endDrag);
-
-        mapWrapper.addEventListener("touchstart", startDrag);
-        window.addEventListener("touchmove", dragMove);
-        window.addEventListener("touchend", endDrag);
+       
     </script>
 
 </body>
