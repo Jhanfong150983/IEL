@@ -14,7 +14,6 @@
             overflow: hidden;
             margin: 0;
             padding: 0;
-            display: block;  /* 避免影響對齊 */
         }
 
         h1 {
@@ -25,22 +24,20 @@
       /*地圖容器區域、地圖內容區域、地圖圖片*/
         .map-container {
             width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-sizing: border-box;
+            height: auto;
+            display: block;
             margin: 0;  /* ✅ 確保沒有額外間距 */
+            box-sizing: border-box;
             padding: 0;
         }
 
         .map-wrapper {
             position: relative;
             width: 80vw;
-            height: 80vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            height: auto;
+
+
+
         }
 
         .map-wrapper img {
