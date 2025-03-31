@@ -8,49 +8,48 @@
     <title>關埔國小資訊設備管理系統</title>
     <style>
       /*整體設計*/
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;  /* 使用 flex 讓內容自動排列 */
+    flex-direction: column;  /* 讓內容由上而下排列 */
+    justify-content: center;  /* 讓內容垂直置中 */
+    align-items: center;  /* 讓內容水平置中 */
+    height: 100vh;  /* 讓 body 佔滿整個視窗 */
+    overflow: hidden;
+}
 
-        h1 {
-            margin: 0;  /* ✅ 移除標題的預設邊距 */
-            padding: 0;
-        }
-        
-      /*地圖容器區域、地圖內容區域、地圖圖片*/
-        .map-container {
-            width: 100vw;
-            height: auto;
-            display: block;
-            margin: 0;  /* ✅ 確保沒有額外間距 */
-            box-sizing: border-box;
-            padding: 0;
-        }
+h1 {
+    margin: 0; /* 移除標題的外邊距，確保沒有間距 */
+    padding: 0;
+}
 
-        .map-wrapper {
-            position: relative;
-            width: 80vw;
-            height: auto;
-            margin: 0;
-        }
+.map-container {
+    width: 80vw;
+    height: auto;
+    display: flex;
+    flex-direction: column; /* 確保內容從上到下排列 */
+    align-items: center; /* 確保圖片居中 */
+}
 
-        .map-wrapper img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            transition: opacity 0.3s ease-in-out;
-            display: block;  /* 使圖片成為塊級元素，並居中 */
-            margin: 0 auto;
-        }
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        /* 預設只顯示第一張圖 */
-        .map-wrapper img:not(:first-child) {
-            display: none;
-        }
+.map-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease-in-out;
+    display: block;
+}
+
     </style>
 </head>
 <body>
