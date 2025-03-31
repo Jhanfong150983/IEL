@@ -13,27 +13,25 @@
             font-family: Arial, sans-serif;
             overflow: hidden;
         }
-      /*平面圖設計*/
+      /*地圖容器區域、地圖內容區域、地圖圖片*/
         .map-container {
             width: 100vw;
             height: 100vh;
-            overflow: hidden;
-            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-        .map-wrapper {
-            display: flex;
-            transition: transform 0.3s ease-out;
+            padding: 5vh;
+            box-sizing: border-box;
         }
 
-        
-        
+        .map {
+            max-width: 90vw;
+            max-height: 90vh;
+        }
         .map-container img {
             width: 90vw;
             height: 90vh;
-            object-fit: cover;
+            object-fit: contain;
         }
         /*按鈕*/
         .nav-button {
