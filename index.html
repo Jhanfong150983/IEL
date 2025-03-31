@@ -12,43 +12,45 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    display: flex;  /* 使用 flex 讓內容自動排列 */
-    flex-direction: column;  /* 讓內容由上而下排列 */
-    justify-content: center;  /* 讓內容垂直置中 */
-    align-items: center;  /* 讓內容水平置中 */
+    display: flex;
+    flex-direction: column;  /* 讓標題在上、圖片在下 */
+    justify-content: center;
+    align-items: center;  /* 確保所有內容水平置中 */
     height: 100vh;  /* 讓 body 佔滿整個視窗 */
     overflow: hidden;
 }
 
 h1 {
-    margin: 0; /* 移除標題的外邊距，確保沒有間距 */
+    margin: 0;
     padding: 0;
 }
 
 .map-container {
-    width: 80vw;
+    width: 100vw;
     height: auto;
     display: flex;
-    flex-direction: column; /* 確保內容從上到下排列 */
-    align-items: center; /* 確保圖片居中 */
+    flex-direction: column; /* 確保內容垂直排列 */
+    align-items: center; /* 讓內部內容（map-wrapper）水平置中 */
 }
 
 .map-wrapper {
     position: relative;
-    width: 100%;
+    width: 80vw;  /* 設定寬度，確保不超過畫面 */
     height: auto;
     display: flex;
-    justify-content: center;
+    justify-content: center;  /* 確保內部的圖片也置中 */
     align-items: center;
 }
 
 .map-wrapper img {
-    width: 100%;
+    max-width: 100%;  /* 確保圖片不會超出容器 */
     height: auto;
     object-fit: contain;
     transition: opacity 0.3s ease-in-out;
     display: block;
+    margin: 0 auto; /* **關鍵：確保圖片本身居中** */
 }
+
 
     </style>
 </head>
