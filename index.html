@@ -220,25 +220,39 @@ h1 {
             });
         });
 
-        fetch("https://script.google.com/macros/s/AKfycbyctMOlY36H8R7AirDRW8kLyLMX1zea2dMvBEhdpkZTWOdBK783yauSgQLG8JDt2Ftq/exec") // 替換為你的 Apps Script 網址
+        fetch("https://script.google.com/macros/s/AKfycbxWMHYFdm9z207DWheJY0jOcO2r578lvud6SUp7lo1IVH6AN47oiuZwVXEWXRrjwW8f/exec")
     .then(response => response.json())
     .then(data => {
-        console.log("載入的資料:", data); // 先檢查這裡是否有資料
-
         document.querySelectorAll(".hotspot").forEach(hotspot => {
-            let space = hotspot.getAttribute("data-space"); 
-            console.log("當前熱點:", space); // 檢查熱點名稱
+            hotspot.addEventListener("mouseenter", (e) => {
+                var spaceName = hotspot.getAttribute("data-space"); // 獲取對應地點
+                var matchedData = data[spaceName]; // 找到對應設備列表
+                
+                if (matchedData) {
+                    var infoText = matchedData.map(item => `${item.type}: ${item.name} (${item.time})`).join("<br>");
+                    showInfoBox(e.pageX, e.pageY, infoText); // 顯示資訊
+                }
+            });
 
-            let match = data.find(item => item.space === space);
-            console.log("匹配到的資料:", match); // 檢查是否匹配到資料
-
-            if (match) {
-                let infoText = `設備類型: ${match.type}\n設備名稱: ${match.name}\n使用時間: ${match.time}`;
-                hotspot.setAttribute("data-info", infoText);
-            }
+            hotspot.addEventListener("mouseleave", () => {
+                hideInfoBox(); // 隱藏資訊框
+            });
         });
-    })
-    .catch(error => console.error("無法載入資料:", error));
+    });
+
+// 顯示資訊框的函式
+function showInfoBox(x, y, text) {
+    var infoBox = document.getElementById("infoBox");
+    infoBox.innerHTML = text; // 設定 HTML 內容，支援換行
+    infoBox.style.left = `${x + 10}px`;
+    infoBox.style.top = `${y + 10}px`;
+    infoBox.style.display = "block";
+}
+
+// 隱藏資訊框的函式
+function hideInfoBox() {
+    document.getElementById("infoBox").style.display = "none";
+}
 
     </script>
 
