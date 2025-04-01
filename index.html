@@ -18,11 +18,12 @@ body {
     align-items: center;  /* 確保所有內容水平置中 */
     height: 100vh;  /* 讓 body 佔滿整個視窗 */
     overflow: hidden;
+    text-align: center;
 }
 
 h1 {
-    margin: 0;
-    padding: 0;
+    margin: 10px 0;
+    font-size: 1.5rem;
 }
 
 .map-container {
@@ -35,7 +36,8 @@ h1 {
 
 .map-wrapper {
     position: relative;
-    width: 80vw;  /* 設定寬度，確保不超過畫面 */
+    width: 90vw;  /* 預設寬度，適應電腦 & 平板 */
+    max-width: 800px; /* 限制最大寬度，避免在大螢幕上過小 */
     height: auto;
     display: flex;
     justify-content: center;  /* 確保內部的圖片也置中 */
@@ -44,6 +46,7 @@ h1 {
 
 .map-wrapper img {
     max-width: 100%;  /* 確保圖片不會超出容器 */
+    max-height: 75vh; /* 限制最大高度，避免超過螢幕 */
     height: auto;
     object-fit: contain;
     transition: opacity 0.3s ease-in-out;
@@ -72,7 +75,30 @@ h1 {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
+@media (max-width: 768px) { /* 平板 */
+    .map-wrapper {
+        width: 95vw;
+        max-width: 600px;
+    }
+    .map-wrapper img {
+        max-height: 60vh;
+    }
+    .arrow {
+        display: none;
+    }
+}
 
+@media (max-width: 480px) { /* 手機 */
+    .map-wrapper {
+        width: 100vw;
+    }
+    .map-wrapper img {
+        max-height: 50vh;
+    }
+    .arrow {
+        display: none;
+    }
+}
     </style>
 </head>
 <body>
