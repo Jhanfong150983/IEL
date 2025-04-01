@@ -45,7 +45,8 @@ h1 {
 }
 
 .map-wrapper img {
-    max-width: 100%;  /* 確保圖片不會超出容器 */
+    width: 100%;
+    max-width: 90%;  /* 確保圖片不會超出容器 */
     max-height: 75vh; /* 限制最大高度，避免超過螢幕 */
     height: auto;
     object-fit: contain;
@@ -74,14 +75,22 @@ h1 {
 .arrow:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
-
+        
+@media (min-width: 1024px) { /* 電腦 */
+    .map-wrapper img {
+        max-width: 800px;
+        max-height: 80vh;
+    }
+}
+        
 @media (max-width: 768px) { /* 平板 */
     .map-wrapper {
         width: 95vw;
         max-width: 600px;
     }
     .map-wrapper img {
-        max-height: 60vh;
+        max-width: 600px;
+        max-height: 65vh;
     }
     .arrow {
         display: none;
@@ -93,6 +102,7 @@ h1 {
         width: 100vw;
     }
     .map-wrapper img {
+        max-width: 95vw;
         max-height: 50vh;
     }
     .arrow {
