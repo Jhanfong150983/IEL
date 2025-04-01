@@ -139,7 +139,8 @@ h1 {
         <button id="prevFloor" class="arrow left">⬅</button>
         <div class="map-wrapper">
             <img src="SchoolMap_1F.png" alt="1樓">
-            <div class="hotspot" data-info="教務處" style="top: 10%; left: 25%;"></div>
+            <div class="hotspot" data-name="教務處" style="top: 80%; left: 30%;"></div>
+            <div class="hotspot" data-space="學務處" style="top: 70%; left: 30%;"></div>
             <img src="SchoolMap_2F.png" alt="2樓">
             <img src="SchoolMap_3F.png" alt="3樓">
         </div>
@@ -218,6 +219,21 @@ h1 {
                 infoBox.style.display = "none"; // 滑鼠離開時隱藏
             });
         });
+
+        fetch("https://script.google.com/macros/s/AKfycbyBYafJLTve3BuaDfPfhOTW-_cvLfWeR8PrxrBDfZAlGXO7JozDFjcSfWnPLUj4CVLp/exec") // 替換為你的 Apps Script 網址
+    .then(response => response.json())
+    .then(data => {
+        document.querySelectorAll(".hotspot").forEach(hotspot => {
+            let space = hotspot.getAttribute("data-space"); // 取得熱點對應的空間名稱
+            let match = data.find(item => item.space === space); // 在 JSON 中找到匹配的空間
+            
+            if (match) {
+                let infoText = `設備類型: ${match.type}\n設備名稱: ${match.name}\n使用時間: ${match.time}`;
+                hotspot.setAttribute("data-info", infoText); // 設定資訊
+            }
+        });
+    })
+    .catch(error => console.error("無法載入資料:", error));
     </script>
 
 </body>
