@@ -223,17 +223,23 @@ h1 {
         fetch("https://script.google.com/macros/s/AKfycbyBYafJLTve3BuaDfPfhOTW-_cvLfWeR8PrxrBDfZAlGXO7JozDFjcSfWnPLUj4CVLp/exec") // 替換為你的 Apps Script 網址
     .then(response => response.json())
     .then(data => {
+        console.log("載入的資料:", data); // 先檢查這裡是否有資料
+
         document.querySelectorAll(".hotspot").forEach(hotspot => {
-            let space = hotspot.getAttribute("data-space"); // 取得熱點對應的空間名稱
-            let match = data.find(item => item.space === space); // 在 JSON 中找到匹配的空間
-            
+            let space = hotspot.getAttribute("data-space"); 
+            console.log("當前熱點:", space); // 檢查熱點名稱
+
+            let match = data.find(item => item.space === space);
+            console.log("匹配到的資料:", match); // 檢查是否匹配到資料
+
             if (match) {
                 let infoText = `設備類型: ${match.type}\n設備名稱: ${match.name}\n使用時間: ${match.time}`;
-                hotspot.setAttribute("data-info", infoText); // 設定資訊
+                hotspot.setAttribute("data-info", infoText);
             }
         });
     })
     .catch(error => console.error("無法載入資料:", error));
+
     </script>
 
 </body>
