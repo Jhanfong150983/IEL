@@ -109,6 +109,28 @@ h1 {
         display: none;
     }
 }
+
+/* 熱區設定 */
+.hotspot {
+    position: absolute;
+    width: 50px;   /* 熱區大小 */
+    height: 50px;
+    background-color: rgba(255, 0, 0, 0.3); /* 透明紅色標示（可隱藏） */
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* 滑鼠資訊視窗 */
+.info-box {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: none; /* 預設隱藏 */
+    pointer-events: none; /* 讓滑鼠可以穿透 */
+}
     </style>
 </head>
 <body>
@@ -117,6 +139,7 @@ h1 {
         <button id="prevFloor" class="arrow left">⬅</button>
         <div class="map-wrapper">
             <img src="SchoolMap_1F.png" alt="1樓">
+            <div class="hotspot" data-info="教務處" style="top: 10%; left: 25%;"></div>
             <img src="SchoolMap_2F.png" alt="2樓">
             <img src="SchoolMap_3F.png" alt="3樓">
         </div>
@@ -175,6 +198,24 @@ h1 {
 
         // 初始化（確保只有第一層顯示）
         showFloor(currentFloor);
+
+        document.querySelectorAll(".hotspot").forEach(hotspot => {
+            const infoBox = document.getElementById("infoBox");
+
+            hotspot.addEventListener("mouseenter", (e) => {
+                infoBox.innerText = hotspot.getAttribute("data-info"); // 顯示資訊
+                infoBox.style.display = "block";
+            });
+
+            hotspot.addEventListener("mousemove", (e) => {
+                infoBox.style.left = `${e.pageX + 10}px`; // 跟隨滑鼠
+                infoBox.style.top = `${e.pageY + 10}px`;
+            });
+
+            hotspot.addEventListener("mouseleave", () => {
+                infoBox.style.display = "none"; // 滑鼠離開時隱藏
+            });
+        });
     </script>
 
 </body>
