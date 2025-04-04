@@ -256,6 +256,7 @@
             // 取得熱點原始座標
             const originalX = parseFloat(hotspot.dataset.x);
             const originalY = parseFloat(hotspot.dataset.y);
+            console.log(`熱點原始座標: (${originalX}, ${originalY})`);
 
             map.onload = function () {
                 if (!map || !hotspot) {
@@ -271,6 +272,9 @@
                 // 原始圖片大小
                 const originalWidth = 802;
                 const originalHeight = 449;
+                console.log(`圖片原始尺寸: ${originalWidth} x ${originalHeight}`);
+                console.log(`圖片目前尺寸: ${map.clientWidth} x ${map.clientHeight}`);
+
                 const currentWidth = map.clientWidth;
                 const currentHeight = map.clientHeight;
                 // 計算縮放比例
