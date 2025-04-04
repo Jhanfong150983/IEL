@@ -170,29 +170,41 @@ h1 {
         }
 
         window.addEventListener('load', function() {
-            const img = document.querySelector('.map-wrapper img');
-            const hotspot = document.querySelector('.hotspot');
+    const img = document.querySelector('.map-wrapper img');
+    const hotspot = document.querySelector('.hotspot');
     
-            // 這裡需要對應到圖片的原始大小
-            const originalWidth = 802;  // 例如圖片的原始寬度
-            const originalHeight = 449; // 例如圖片的原始高度
+    // 這裡需要對應到圖片的原始大小
+    const originalWidth = 802;  // 例如圖片的原始寬度
+    const originalHeight = 449; // 例如圖片的原始高度
     
-            // 計算圖片實際顯示尺寸的縮放比例
-            const scaleX = img.clientWidth / originalWidth;
-            const scaleY = img.clientHeight / originalHeight;
+    // 計算圖片實際顯示尺寸的縮放比例
+    const scaleX = img.clientWidth / originalWidth;
+    const scaleY = img.clientHeight / originalHeight;
 
-            // 取得熱區的原始位置
-            const originalX = parseFloat(hotspot.getAttribute('data-original-x'));
-            const originalY = parseFloat(hotspot.getAttribute('data-original-y'));
+    // 輸出縮放比例到控制台
+    console.log("scaleX:", scaleX);
+    console.log("scaleY:", scaleY);
 
-            // 根據縮放比例調整熱區位置
-            const adjustedX = originalX * scaleX;
-            const adjustedY = originalY * scaleY;
+    // 取得熱區的原始位置
+    const originalX = parseFloat(hotspot.getAttribute('data-original-x'));
+    const originalY = parseFloat(hotspot.getAttribute('data-original-y'));
 
-            // 設置熱區的新位置
-            hotspot.style.left = `${adjustedX}px`;
-            hotspot.style.top = `${adjustedY}px`;
-        });
+    // 輸出熱區的原始位置
+    console.log("Original X:", originalX);
+    console.log("Original Y:", originalY);
+
+    // 根據縮放比例調整熱區位置
+    const adjustedX = originalX * scaleX;
+    const adjustedY = originalY * scaleY;
+
+    // 輸出調整後的熱區位置
+    console.log("Adjusted X:", adjustedX);
+    console.log("Adjusted Y:", adjustedY);
+
+    // 設置熱區的新位置
+    hotspot.style.left = `${adjustedX}px`;
+    hotspot.style.top = `${adjustedY}px`;
+});
         
         // 測試切換樓層（可綁定按鈕事件）
         document.addEventListener("keydown", (event) => {
