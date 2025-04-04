@@ -112,6 +112,7 @@ h1 {
     height: 10px;
     background: red;
     border-radius: 50%;
+    transform: translate(-50%, -50%); /* 讓點的中心對準計算出的座標 */
 }
 
 /* 滑鼠資訊視窗 */
@@ -165,26 +166,17 @@ h1 {
             });
         }
 
-        const originalWidth = 802; // 原始圖片寬度
-        const originalHeight = 449; // 原始圖片高度
-        const hotspotList = [
-            { element: '#hotspot1', originalTop: 340.76, originalLeft: 256.64 }, // 教務處
-        ];
-        
-        window.onload = function() {
-            adjustHotspots();
-        };
-
-        window.onresize = function() {
-            adjustHotspots();
-        };
+        window.onload = adjustHotspots;
+        window.onresize = adjustHotspots;
 
         function adjustHotspots() {
             const img = document.getElementById('schoolMap');
+            const wrapper = document.querySelector('.map-wrapper');
             const hotspots = document.querySelectorAll('.hotspot');
 
             if (!img.complete) return;
 
+            // 確保圖片已經載入，並取得顯示大小
             const imgWidth = img.clientWidth;
             const imgHeight = img.clientHeight;
 
@@ -192,11 +184,13 @@ h1 {
                 const originalX = parseFloat(hotspot.dataset.originalX); // 802px 對應的 X
                 const originalY = parseFloat(hotspot.dataset.originalY); // 449px 對應的 Y
 
-                const leftPercent = (originalX / 802) * 100;
-                const topPercent = (originalY / 449) * 100;
+                // 計算在當前顯示大小下的位置
+                const leftPosition = (originalX / 802) * imgWidth;
+                const topPosition = (originalY / 449) * imgHeight;
 
-                hotspot.style.left = `${leftPercent}%`;
-                hotspot.style.top = `${topPercent}%`;
+                // 設定座標
+                hotspot.style.left = `${leftPosition}px`;
+                hotspot.style.top = `${topPosition}px`;
             });
         }
         
