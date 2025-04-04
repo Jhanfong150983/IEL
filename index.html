@@ -24,15 +24,17 @@ body {
 h1 {
     margin: 10px 0;
     font-size: 1.5rem;
+    height: 60px; /* 設定標題的固定高度 */
 }
 
 .map-container {
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* 讓內部內容垂直置中 */
+    justify-content: flex-start; /* 讓內部內容垂直置中 */
+    position: relative;
 }
 
 .map-wrapper {
@@ -44,6 +46,7 @@ h1 {
     align-items: center;
     padding-left: 50px;  /* 讓圖片避免與左邊的按鈕重疊 */
     padding-right: 50px;
+    overflow: hidden;
 }
 
 .map-wrapper img {
