@@ -60,6 +60,60 @@
             width: 100vw;
             height: 20vh;
             background-color:#f0f0f0;            /* 設定背景色，讓區塊可見 */
+            box-sizing: border-box;
+        }
+
+/* 每個區塊的樣式 */
+.classroom-info, .school-stats {
+    background-color: white;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 標題樣式 */
+h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* 表格樣式 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+/* 表格邊框及單元格樣式 */
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+/* 標題列樣式 */
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+/* 表格行的交替背景顏色 */
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* 表格的響應式設計 */
+@media (max-width: 768px) {
+    table {
+        font-size: 0.9rem;
+    }
+    th, td {
+        padding: 8px;
+    }
+}
+
     </style>
 </head>
 
