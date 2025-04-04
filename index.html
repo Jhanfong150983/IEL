@@ -59,22 +59,23 @@
     <h1>關埔國小資訊設備管理系統</h1>
     <div class = "map-container">
         <button class = "button" onclick = "prevmap()">⬅</button>
-        <img class = "map" src="SchoolMap_1F.png" alt="1樓">
-        <img class = "map" src="SchoolMap_2F.png" alt="2樓">
-        <img class = "map" src="SchoolMap_3F.png" alt="3樓">
+        <img id = "map1" class = "map" src="SchoolMap_1F.png" alt="1樓">
+        <img id = "map2" class = "map" src="SchoolMap_2F.png" alt="2樓">
+        <img id = "map3" class = "map" src="SchoolMap_3F.png" alt="3樓">
         <button class = "button" onclick = "nextmap()">➡</button>
     </div>
     
     <script>
-        const maps = ["SchoolMap_1F.png", "SchoolMap_2F.png", "SchoolMap_3F.png"];
+        const maps = ["map1", "map2", "map3"];
         let currentIndex = 0; // 當前圖片索引
 
         function updateImage() {
-        document.getElementById("maps").src = maps[currentIndex];
+        document.getElementById(maps[currentIndex]).src = maps[currentIndex];
             for (let i = 0; i < maps.length; i++) {
-                maps[i].style.display = "none";
+                document.getElementById(maps[i]).style.display = "none";
             }
-            images[currentIndex].style.display = "block";
+            document.getElementById(maps[currentIndex]).style.display = "block";
+        }
         }
         function nextmap() {
             if (currentIndex < maps.length - 1) {
@@ -83,8 +84,8 @@
             }
         }
         function prevmap() {
-            if (currentIndex < maps.length - 1) {
-                currentIndex++;
+            if (currentIndex > 0) {
+                currentIndex--;
                 updateImage();
             }
         }
