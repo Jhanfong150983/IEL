@@ -32,44 +32,46 @@
         
          /* 地圖顯示區塊 */
         .map-container {
-            margin: 5px;
-            width: 100vw;                       /* 區塊寬度最大值視窗寬度 */
-            height: 60vh;
-            display: flex;                      /* 布局模式 */
-            flex-direction: row;                /* 布局模式-主軸由上而下 */
-            justify-content: center;            /* 布局模式-主軸置中對齊 */
-            align-items: center;                /* 布局模式-交叉軸水平置中 */
-            position: relative;
-        }
-        .image-container {
-            width: 80%;
-            max-width: 100%;
-            max-height: 100%;
-            justify-content: center;
-            align-items: center;    
-            position: relative;
-            
-        }
-            
-        .map{
-            margin: 2px;
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            border:1px solid black;             /* 邊框粗1px */
-            position: relative;
-        }
+    margin: 5px;
+    width: 100vw; /* 讓區塊寬度最大為視窗寬度 */
+    height: 60vh; /* 讓高度為視窗的 60% */
+    display: flex; /* 使用 flex 讓內部元素水平排列 */
+    justify-content: center; /* 讓內容置中 */
+    align-items: center; /* 讓內容在交叉軸（垂直方向）也置中 */
+    position: relative;
+}
 
-        /* 按鈕樣式 */
-        .button{
-            width: 10%;
-            font-size: 10rem;
-            background-color: rgba(0, 0, 0, 0.5);/* 背景顏色 */
-            color: white;                        /* 元素顏色 */
-            border:1px solid black;             /* 邊框粗1px */
-            border: none;                        /* 邊框無*/
-            cursor: pointer;                     /* 游標便手指頭 */
-        }
+.button {
+    width: 10%; /* 佔 map-container 的 10% */
+    height: 100%; /* 按鈕高度與 .map-container 一致 */
+    font-size: 3rem; /* 調整按鈕大小 */
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+    color: white; /* 按鈕文字顏色 */
+    border: none; /* 移除邊框 */
+    cursor: pointer; /* 滑鼠指標變成手型 */
+    display: flex; /* 讓按鈕內部內容居中 */
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+}
+
+.image-container {
+    width: 80%; /* 佔 map-container 80% */
+    height: 100%; /* 高度與 .map-container 一致 */
+    display: flex; /* 讓 .map 居中 */
+    justify-content: center;
+    align-items: center;
+    position: relative; /* 讓 .hotspot 相對於這個容器定位 */
+}
+
+.map {
+    width: 100%; /* 讓地圖圖片填滿 .image-container */
+    height: auto; /* 保持圖片原始比例 */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* 確保圖片完整顯示，不變形 */
+    border: 1px solid black;
+}
+
         
         /* 資料顯示區塊 */
         .data-container{
