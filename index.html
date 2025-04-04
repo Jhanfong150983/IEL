@@ -132,6 +132,7 @@
             border-radius: 50%;
             background-color: rgba(255, 0, 0, 0.5); /* 半透明紅色背景 */
             opacity: 0.5; /* 初始透明度 */
+            transform: translate(-50%, -50%);
         }
         .hotspot:hover {
             opacity: 1;    /* 滑鼠懸停時，熱點變成不透明 */
@@ -145,7 +146,7 @@
     <div class = "map-container">
         <button class = "button" onclick = "prevmap()">⬅</button>
         <img id = "map1" class = "map" src="SchoolMap_1F.png" alt="1樓">
-        <div class="hotspot" style="top: 1271.72px; left: 722.34px;"></div>
+        <div id = "hotspot1" class="hotspot" data-x="214" data-y="352" alt="教務處"></div>
         <img id = "map2" class = "map" src="SchoolMap_2F.png" alt="2樓" style="display: none;">
         <img id = "map3" class = "map" src="SchoolMap_3F.png" alt="3樓" style="display: none;">
         <button class = "button" onclick = "nextmap()">➡</button>
@@ -219,6 +220,7 @@
             </table>
         </div>
     </div>
+    
     <script>
         const maps = ["map1", "map2", "map3"];
         let currentIndex = 0; // 當前圖片索引
@@ -241,6 +243,31 @@
                 updateImage();
             }
         }
+
+        window.onload = function() {
+            const map = document.getElementById("map1");
+            const hotspot = document.getElementById("hotspot1");
+            // 原始圖片大小
+            const originalWidth = 802;
+            const originalHeight = 449;
+            // 計算圖片的當前寬度和高度
+            const originalX = parseFloat(hotspot.dataset.x);
+            const originalY = parseFloat(hotspot.dataset.y);
+
+        map.onload = function () {
+            const currentWidth = map.clientWidth;
+            const currentHeight = map.clientHeight;
+            // 計算縮放比例
+            const scaleX = currentWidth / originalWidth;
+            const scaleY = currentHeight / originalHeight;
+            // 計算動態熱點位置
+            const newX = originalX * scaleX;
+            const newY = originalY * scaleY;
+            // 設置熱點的位置
+            hotspot.style.top = `${newY}px`;
+            hotspot.style.left = `${newX}px`;
+        }}
+
     </script>
 </body>
 </html>
