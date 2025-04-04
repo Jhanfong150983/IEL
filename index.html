@@ -247,10 +247,19 @@ h1 {
             { element: '#hotspot36', originalTop: 19.15, originalLeft: 95.39 }, // 410
         ];
         
-        document.addEventListener("DOMContentLoaded", function() {
+        window.onload = function() {
           const img = document.getElementById('schoolMap');
-          adjustHotspots();
-        });
+
+          // 檢查圖片是否已經加載完成
+          img.onload = function() {
+            adjustHotspots();
+          };
+
+          // 如果圖片已經加載完成，直接執行
+          if (img.complete) {
+            adjustHotspots();
+          }
+        };
 
         function adjustHotspots() {
           const img = document.getElementById('schoolMap');
@@ -265,10 +274,13 @@ h1 {
             const leftPosition = (leftPercentage / 100) * imgWidth;
 
             const element = document.querySelector(hotspot.element);
-            element.style.top = `${topPosition}px`;
-            element.style.left = `${leftPosition}px`;
+            if (element) {
+              element.style.top = `${topPosition}px`;
+              element.style.left = `${leftPosition}px`;
+            }
           });
         }
+
 
 
 
