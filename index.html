@@ -249,6 +249,7 @@
             updateHotspotPosition(); // 頁面載入時執行
         }
         function updateHotspotPosition(){
+            console.log("執行 updateHotspotPosition()...");
             const map = document.getElementById("map1");
             const hotspot = document.getElementById("hotspot1");
             
@@ -258,7 +259,7 @@
 
             map.onload = function () {
                 if (!map || !hotspot) {
-                    console.warn("找不到地圖或熱點元素！");
+                    console.error("找不到地圖或熱點元素！");
                     return;
                 }
 
