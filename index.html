@@ -28,32 +28,27 @@ h1 {
 
 .map-container {
     width: 100vw;
-    height: auto;
+    height: 100vh;
     display: flex;
-    flex-direction: column; /* 確保內容垂直排列 */
-    align-items: center; /* 讓內部內容（map-wrapper）水平置中 */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* 讓內部內容垂直置中 */
 }
 
 .map-wrapper {
-    position: relative;
-    width: 100vw;  /* 預設寬度，適應電腦 & 平板 */
-    height: 100vh; /* 讓容器填滿整個螢幕 */
-    height: auto;
-    display: flex;
-    justify-content: center;  /* 確保內部的圖片也置中 */
-    align-items: center;
+    position: relative; /* 讓 .hotspot 依照這個為基準 */
+    width: auto; /* 讓內部圖片決定寬度 */
+    height: auto; /* 讓內部圖片決定高度 */
 }
 
 .map-wrapper img {
-    width: 100%;
-    max-width: 90%;  /* 確保圖片不會超出容器 */
-    max-height: 75vh; /* 限制最大高度，避免超過螢幕 */
+    width: auto;
+    max-width: 90vw; /* 限制最大寬度 */
+    max-height: 80vh; /* 限制最大高度 */
     height: auto;
-    object-fit: contain;
-    transition: opacity 0.3s ease-in-out;
     display: block;
-    margin: 0 auto; /* **關鍵：確保圖片本身居中** */
 }
+        
 /* 左右切換按鈕 */
 .arrow {
     background-color: rgba(0, 0, 0, 0.5);
@@ -113,11 +108,10 @@ h1 {
 /* 熱區設定 */
 .hotspot {
     position: absolute;
-    width: 40px;   /* 熱區大小 */
-    height: 40px;
-    background-color: rgba(255, 0, 0, 0.3); /* 透明紅色標示（可隱藏） */
+    width: 10px;
+    height: 10px;
+    background: red;
     border-radius: 50%;
-    cursor: pointer;
 }
 
 /* 滑鼠資訊視窗 */
@@ -178,44 +172,33 @@ h1 {
         ];
         
         window.onload = function() {
-          const img = document.getElementById('schoolMap');
-
-          // 等待圖片加載完成
-          img.onload = function() {
             adjustHotspots();
-          };
+        };
 
-          // 如果圖片已經加載完成，直接執行
-          if (img.complete) {
+        window.onresize = function() {
             adjustHotspots();
-          }
         };
 
         function adjustHotspots() {
-          const img = document.getElementById('schoolMap');
-          const imgWidth = img.naturalWidth;  // 原始圖片寬度
-          const imgHeight = img.naturalHeight;  // 原始圖片高度
+            const img = document.getElementById('schoolMap');
+            const hotspots = document.querySelectorAll('.hotspot');
 
-          // 遍歷熱點列表，根據圖片尺寸計算熱點的百分比
-          hotspotList.forEach(hotspot => {
-            // 計算百分比位置
-            const topPercentage = (hotspot.originalTop / imgHeight) * 100;  // 計算垂直百分比
-            const leftPercentage = (hotspot.originalLeft / imgWidth) * 100;  // 計算水平百分比
+            if (!img.complete) return;
 
-            // 根據百分比設置熱點位置
-            const element = document.querySelector(hotspot.element);
-            if (element) {
-              element.style.top = `${topPercentage}%`;  // 使用百分比設置熱點的垂直位置
-              element.style.left = `${leftPercentage}%`;  // 使用百分比設置熱點的水平位置
-            }
-          });
+            const imgWidth = img.clientWidth;
+            const imgHeight = img.clientHeight;
+
+            hotspots.forEach(hotspot => {
+                const originalX = parseFloat(hotspot.dataset.originalX); // 802px 對應的 X
+                const originalY = parseFloat(hotspot.dataset.originalY); // 449px 對應的 Y
+
+                const leftPercent = (originalX / 802) * 100;
+                const topPercent = (originalY / 449) * 100;
+
+                hotspot.style.left = `${leftPercent}%`;
+                hotspot.style.top = `${topPercent}%`;
+            });
         }
-
-
-
-
-
-
         
         // 測試切換樓層（可綁定按鈕事件）
         document.addEventListener("keydown", (event) => {
