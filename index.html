@@ -37,17 +37,18 @@ h1 {
 
 .map-wrapper {
     position: relative; /* 讓 .hotspot 依照這個為基準 */
-    width: auto; /* 讓內部圖片決定寬度 */
-    height: auto; /* 讓內部圖片決定高度 */
+    width: 100%; /* 讓內部圖片決定寬度 */
+    height: 100%; /* 讓內部圖片決定高度 */
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-left: 50px;  /* 讓圖片避免與左邊的按鈕重疊 */
+    padding-right: 50px;
 }
 
 .map-wrapper img {
-    width: 120%;  /* 讓圖片寬度比原始大 20% */
-    height: auto; /* 自動調整高度以保持圖片的比例 */
-    max-height: 100vh; /* 確保圖片的高度不會超過視窗高度 */
+    width: 100%;  /* 讓圖片寬度比原始大 20% */
+    height: 100%; /* 自動調整高度以保持圖片的比例 */
     object-fit: contain; /* 保持圖片比例不失真 */
     display: block;
     transition: transform 0.3s ease-in-out;
