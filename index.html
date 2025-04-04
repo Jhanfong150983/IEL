@@ -208,66 +208,62 @@ h1 {
 
         const originalWidth = 802; // 原始圖片寬度
         const originalHeight = 449; // 原始圖片高度
-        const hotspots = [
+        const hotspotList = [
             { element: '#hotspot1', originalTop: 94.65, originalLeft: 39.90 }, // 教務處
-            { element: '#hotspot1', originalTop: 94.65, originalLeft: 39.90 }, // 教務處
-    { element: '#hotspot2', originalTop: 80.18, originalLeft: 40.52 }, // 總務處
-    { element: '#hotspot3', originalTop: 71.27, originalLeft: 40.52 }, // 學務處
-    { element: '#hotspot4', originalTop: 105.79, originalLeft: 56.73 }, // 健康中心
-    { element: '#hotspot5', originalTop: 105.79, originalLeft: 66.08 }, // 101
-    { element: '#hotspot6', originalTop: 105.79, originalLeft: 74.81 }, // 102
-    { element: '#hotspot7', originalTop: 106.90, originalLeft: 83.54 }, // 103
-    { element: '#hotspot8', originalTop: 96.88, originalLeft: 87.28 }, // 104
-    { element: '#hotspot9', originalTop: 92.43, originalLeft: 52.99 }, // 科辦一
-    { element: '#hotspot10', originalTop: 87.97, originalLeft: 61.72 }, // 106
-    { element: '#hotspot11', originalTop: 84.63, originalLeft: 68.58 }, // 105
-    { element: '#hotspot12', originalTop: 75.72, originalLeft: 78.55 }, // 圖書館1F
-    { element: '#hotspot13', originalTop: 64.59, originalLeft: 87.28 }, // 視聽教室
-    { element: '#hotspot14', originalTop: 51.22, originalLeft: 28.68 }, // 輔導室
-    { element: '#hotspot15', originalTop: 42.32, originalLeft: 27.43 }, // 專題二
-    { element: '#hotspot16', originalTop: 35.63, originalLeft: 26.18 }, // 科辦二
-    { element: '#hotspot17', originalTop: 26.73, originalLeft: 34.29 }, // 種子班
-    { element: '#hotspot18', originalTop: 26.73, originalLeft: 39.90 }, // 團輔室
-    { element: '#hotspot19', originalTop: 35.63, originalLeft: 50.50 }, // 506
-    { element: '#hotspot20', originalTop: 35.63, originalLeft: 58.60 }, // 專題一
-    { element: '#hotspot21', originalTop: 32.29, originalLeft: 72.32 }, // 手作一
-    { element: '#hotspot22', originalTop: 35.63, originalLeft: 78.55 }, // 手作二
-    { element: '#hotspot23', originalTop: 13.36, originalLeft: 26.18 }, // 505
-    { element: '#hotspot24', originalTop: 8.46, originalLeft: 29.93 }, // 504
-    { element: '#hotspot25', originalTop: 7.57, originalLeft: 38.03 }, // 503
-    { element: '#hotspot26', originalTop: 8.91, originalLeft: 43.02 }, // 502
-    { element: '#hotspot27', originalTop: 11.14, originalLeft: 47.76 }, // 501
-    { element: '#hotspot28', originalTop: 14.48, originalLeft: 56.73 }, // 自然二
-    { element: '#hotspot29', originalTop: 15.59, originalLeft: 62.97 }, // 自然一
-    { element: '#hotspot30', originalTop: 44.54, originalLeft: 87.28 }, // 自然三
-    { element: '#hotspot31', originalTop: 35.63, originalLeft: 89.15 }, // 210
-    { element: '#hotspot32', originalTop: 41.20, originalLeft: 96.01 }, // 209
-    { element: '#hotspot33', originalTop: 36.75, originalLeft: 102.24 }, // 208
-    { element: '#hotspot34', originalTop: 24.50, originalLeft: 110.97 }, // 207
-    { element: '#hotspot35', originalTop: 19.60, originalLeft: 89.15 }, // 409
-    { element: '#hotspot36', originalTop: 19.15, originalLeft: 95.39 }, // 410
-          ];
+            { element: '#hotspot2', originalTop: 80.18, originalLeft: 40.52 }, // 總務處
+            { element: '#hotspot3', originalTop: 71.27, originalLeft: 40.52 }, // 學務處
+            { element: '#hotspot4', originalTop: 105.79, originalLeft: 56.73 }, // 健康中心
+            { element: '#hotspot5', originalTop: 105.79, originalLeft: 66.08 }, // 101
+            { element: '#hotspot6', originalTop: 105.79, originalLeft: 74.81 }, // 102
+            { element: '#hotspot7', originalTop: 106.90, originalLeft: 83.54 }, // 103
+            { element: '#hotspot8', originalTop: 96.88, originalLeft: 87.28 }, // 104
+            { element: '#hotspot9', originalTop: 92.43, originalLeft: 52.99 }, // 科辦一
+            { element: '#hotspot10', originalTop: 87.97, originalLeft: 61.72 }, // 106
+            { element: '#hotspot11', originalTop: 84.63, originalLeft: 68.58 }, // 105
+            { element: '#hotspot12', originalTop: 75.72, originalLeft: 78.55 }, // 圖書館1F
+            { element: '#hotspot13', originalTop: 64.59, originalLeft: 87.28 }, // 視聽教室
+            { element: '#hotspot14', originalTop: 51.22, originalLeft: 28.68 }, // 輔導室
+            { element: '#hotspot15', originalTop: 42.32, originalLeft: 27.43 }, // 專題二
+            { element: '#hotspot16', originalTop: 35.63, originalLeft: 26.18 }, // 科辦二
+            { element: '#hotspot17', originalTop: 26.73, originalLeft: 34.29 }, // 種子班
+            { element: '#hotspot18', originalTop: 26.73, originalLeft: 39.90 }, // 團輔室
+            { element: '#hotspot19', originalTop: 35.63, originalLeft: 50.50 }, // 506
+            { element: '#hotspot20', originalTop: 35.63, originalLeft: 58.60 }, // 專題一
+            { element: '#hotspot21', originalTop: 32.29, originalLeft: 72.32 }, // 手作一
+            { element: '#hotspot22', originalTop: 35.63, originalLeft: 78.55 }, // 手作二
+            { element: '#hotspot23', originalTop: 13.36, originalLeft: 26.18 }, // 505
+            { element: '#hotspot24', originalTop: 8.46, originalLeft: 29.93 }, // 504
+            { element: '#hotspot25', originalTop: 7.57, originalLeft: 38.03 }, // 503
+            { element: '#hotspot26', originalTop: 8.91, originalLeft: 43.02 }, // 502
+            { element: '#hotspot27', originalTop: 11.14, originalLeft: 47.76 }, // 501
+            { element: '#hotspot28', originalTop: 14.48, originalLeft: 56.73 }, // 自然二
+            { element: '#hotspot29', originalTop: 15.59, originalLeft: 62.97 }, // 自然一
+            { element: '#hotspot30', originalTop: 44.54, originalLeft: 87.28 }, // 自然三
+            { element: '#hotspot31', originalTop: 35.63, originalLeft: 89.15 }, // 210
+            { element: '#hotspot32', originalTop: 41.20, originalLeft: 96.01 }, // 209
+            { element: '#hotspot33', originalTop: 36.75, originalLeft: 102.24 }, // 208
+            { element: '#hotspot34', originalTop: 24.50, originalLeft: 110.97 }, // 207
+            { element: '#hotspot35', originalTop: 19.60, originalLeft: 89.15 }, // 409
+            { element: '#hotspot36', originalTop: 19.15, originalLeft: 95.39 }, // 410
+        ];
         
-        function adjustHotspots() {
+        window.onload = function() {
             const img = document.getElementById('schoolMap');
             const imgWidth = img.clientWidth;
             const imgHeight = img.clientHeight;
 
-            hotspots.forEach(hotspot => {
+            hotspotList.forEach(hotspot => {
               const topPercentage = hotspot.originalTop;
               const leftPercentage = hotspot.originalLeft;
 
               const topPosition = (topPercentage / 100) * imgHeight;
               const leftPosition = (leftPercentage / 100) * imgWidth;
 
-              const element = document.querySelector(hotspot.element);
+            const element = document.querySelector(hotspot.element);
               element.style.top = `${topPosition}px`;
               element.style.left = `${leftPosition}px`;
             });
-        }
-
-  window.addEventListener('resize', adjustHotspots);
-  window.addEventListener('load', adjustHotspots);
+          };
 
 
 
