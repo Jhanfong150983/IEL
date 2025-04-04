@@ -27,9 +27,18 @@
         .map-container {
             width: 100vw;                       /* 區塊寬度最大值視窗寬度 */
             display: flex;                      /* 布局模式 */
-            flex-direction: row;             /* 布局模式-主軸由上而下 */
+            flex-direction: row;                /* 布局模式-主軸由上而下 */
             justify-content: center;            /* 布局模式-主軸置中對齊 */
             align-items: center;                /* 布局模式-交叉軸水平置中 */
+        }
+
+        /* 按鈕樣式 */
+        .button{
+            background-color: rgba(0, 0, 0, 0.5);/* 背景顏色 */
+            color: white;                        /* 元素顏色 */
+            border: none;                        /* 邊框 */
+            cursor: pointer;                     /* 游標便手指頭 */
+            height: 100%
         }
 
     </style>
@@ -38,9 +47,9 @@
 <body>
     <h1>關埔國小資訊設備管理系統</h1>
     <div class = "map-container">
-        <button>◀️</button>
+        <button class = "button">◀️</button>
         <img src="SchoolMap_1F.png" alt="1樓">
-        <button>▶️</button>
+        <button class = "button">▶️</button>
     </div>
     
     <script>
