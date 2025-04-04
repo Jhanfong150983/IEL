@@ -254,19 +254,20 @@
             const originalX = parseFloat(hotspot.dataset.x);
             const originalY = parseFloat(hotspot.dataset.y);
 
-        map.onload = function () {
-            const currentWidth = map.clientWidth;
-            const currentHeight = map.clientHeight;
-            // 計算縮放比例
-            const scaleX = currentWidth / originalWidth;
-            const scaleY = currentHeight / originalHeight;
-            // 計算動態熱點位置
-            const newX = originalX * scaleX;
-            const newY = originalY * scaleY;
-            // 設置熱點的位置
-            hotspot.style.top = `${newY}px`;
-            hotspot.style.left = `${newX}px`;
-        }}
+            map.onload = function () {
+                const currentWidth = map.clientWidth;
+                const currentHeight = map.clientHeight;
+                // 計算縮放比例
+                const scaleX = currentWidth / originalWidth;
+                const scaleY = currentHeight / originalHeight;
+                // 計算動態熱點位置
+                const newX = originalX * scaleX;
+                const newY = originalY * scaleY;
+                // 設置熱點的位置
+                hotspot.style.top = `${newY}px`;
+                hotspot.style.left = `${newX}px`;
+                }
+            }
 
     </script>
 </body>
