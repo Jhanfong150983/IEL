@@ -154,20 +154,29 @@ h1 {
         const prevButton = document.getElementById("prevFloor");
         const nextButton = document.getElementById("nextFloor");
         
-        function showFloor(index) {
-            images.forEach((img, i) => {
-                img.style.display = i === index ? "block" : "none";
-            });
+        window.addEventListener('load', function() {
+    const images = document.querySelectorAll('.map-wrapper img');
+    const hotspots = document.querySelectorAll('.hotspot');
     
-            // 顯示對應樓層的熱區，隱藏其他樓層
+    // 假設第一張圖片是我們要參考的原始圖片
+    const firstImage = images[0];
+    const originalWidth = firstImage.naturalWidth;  // 這是圖片的原始寬度
+    const originalHeight = firstImage.naturalHeight; // 這是圖片的原始高度
+    
+    // 計算圖片實際顯示尺寸的縮放比例
+    function updateHotspots() {
+        images.forEach((img, index) => {
+            // 計算圖片顯示尺寸的縮放比例
+            const scaleX = img.clientWidth / originalWidth;
+            const scaleY = img.clientHeight / originalHeight;
+
+            // 輸出縮放比例到控制台
+            console.log("scaleX:", scaleX);
+            console.log("scaleY:", scaleY);
+
             hotspots.forEach(hotspot => {
                 const floor = parseInt(hotspot.getAttribute("data-floor"));
                 if (floor === index) {
-                    hotspot.style.display = "block"; // 顯示該樓層熱區
-                    // 計算圖片的縮放比例
-                    const scaleX = images[index].clientWidth / originalWidth;
-                    const scaleY = images[index].clientHeight / originalHeight;
-            
                     // 取得每個熱區的原始位置
                     const originalX = parseFloat(hotspot.getAttribute('data-original-x'));
                     const originalY = parseFloat(hotspot.getAttribute('data-original-y'));
@@ -179,11 +188,38 @@ h1 {
                     // 設置每個熱區的新位置
                     hotspot.style.left = `${adjustedX}px`;
                     hotspot.style.top = `${adjustedY}px`;
-                } else {
-                    hotspot.style.display = "none"; // 隱藏其他樓層的熱區
                 }
             });
-        }
+        });
+    }
+
+    // 在頁面加載後初始化
+    updateHotspots();
+
+    // 切換樓層時更新熱區位置
+    function showFloor(index) {
+        images.forEach((img, i) => {
+            img.style.display = i === index ? "block" : "none";
+        });
+
+        // 顯示對應樓層的熱區，隱藏其他樓層
+        hotspots.forEach(hotspot => {
+            const floor = parseInt(hotspot.getAttribute("data-floor"));
+            if (floor === index) {
+                hotspot.style.display = "block"; // 顯示該樓層熱區
+            } else {
+                hotspot.style.display = "none";  // 隱藏其他樓層的熱區
+            }
+        });
+
+        // 重新調整熱區的位置
+        updateHotspots();
+    }
+    
+    // 初始顯示第一層
+    showFloor(0);
+});
+
         
         // 測試切換樓層（可綁定按鈕事件）
         document.addEventListener("keydown", (event) => {
