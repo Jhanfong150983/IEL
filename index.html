@@ -258,41 +258,29 @@
             const originalY = parseFloat(hotspot.dataset.y);
             console.log(`熱點原始座標: (${originalX}, ${originalY})`);
 
-            map.onload = function () {
-                if (!map || !hotspot) {
-                    console.error("找不到地圖或熱點元素！");
-                    return;
-                }
+            // 原始圖片大小
+            const originalWidth = 802;
+            const originalHeight = 449;
+            console.log(`圖片原始尺寸: ${originalWidth} x ${originalHeight}`);
+            console.log(`圖片目前尺寸: ${map.clientWidth} x ${map.clientHeight}`);
 
-                if (!map.complete) {
-                    console.log("圖片尚未載入完成，等待圖片載入...");
-                    map.onload = updateHotspotPosition;
-                    return;
-                }
-                // 原始圖片大小
-                const originalWidth = 802;
-                const originalHeight = 449;
-                console.log(`圖片原始尺寸: ${originalWidth} x ${originalHeight}`);
-                console.log(`圖片目前尺寸: ${map.clientWidth} x ${map.clientHeight}`);
+            const currentWidth = map.clientWidth;
+            const currentHeight = map.clientHeight;
+            // 計算縮放比例
+            const scaleX = currentWidth / originalWidth;
+            const scaleY = currentHeight / originalHeight;
+            // 計算動態熱點位置
+            const newX = originalX * scaleX;
+            const newY = originalY * scaleY;
 
-                const currentWidth = map.clientWidth;
-                const currentHeight = map.clientHeight;
-                // 計算縮放比例
-                const scaleX = currentWidth / originalWidth;
-                const scaleY = currentHeight / originalHeight;
-                // 計算動態熱點位置
-                const newX = originalX * scaleX;
-                const newY = originalY * scaleY;
-
-                console.log(`Original X: ${originalX}, Original Y: ${originalY}`);
-                console.log(`ScaleX: ${scaleX}, ScaleY: ${scaleY}`);
-                console.log(`New X: ${newX}, New Y: ${newY}`);
+            console.log(`Original X: ${originalX}, Original Y: ${originalY}`);
+            console.log(`ScaleX: ${scaleX}, ScaleY: ${scaleY}`);
+            console.log(`New X: ${newX}, New Y: ${newY}`);
                 
-                // 設置熱點的位置
-                hotspot.style.top = `${newY}px`;
-                hotspot.style.left = `${newX}px`;
-                }
-            }
+            // 設置熱點的位置
+            hotspot.style.top = `${newY}px`;
+            hotspot.style.left = `${newX}px`;
+             }
 
     </script>
 </body>
