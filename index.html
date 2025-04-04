@@ -127,6 +127,8 @@
 
         .hotspot {
             position: absolute;
+            width: 30px;           /* 設置圓形的寬度 */
+            height: 30px;          /* 設置圓形的高度 */
             border-radius: 50%;
             background-color: rgba(255, 0, 0, 0.5); /* 半透明紅色背景 */
             opacity: 0.5; /* 初始透明度 */
@@ -143,7 +145,7 @@
     <div class = "map-container">
         <button class = "button" onclick = "prevmap()">⬅</button>
         <img id = "map1" class = "map" src="SchoolMap_1F.png" alt="1樓">
-        <div class="hotspot" style="top: 1271.72px; left: 722.34px; width: 600px; height: 600px; border-radius: 50%;"></div>
+        <div class="hotspot" style="top: 1271.72px; left: 722.34px;"></div>
         <img id = "map2" class = "map" src="SchoolMap_2F.png" alt="2樓" style="display: none;">
         <img id = "map3" class = "map" src="SchoolMap_3F.png" alt="3樓" style="display: none;">
         <button class = "button" onclick = "nextmap()">➡</button>
