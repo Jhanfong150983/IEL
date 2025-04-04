@@ -136,7 +136,7 @@ h1 {
     <div class="map-container">
         <button id="prevFloor" class="arrow left">⬅</button>
         <div class="map-wrapper">
-            <img id="schoolMap" img src="SchoolMap_1F.png" alt="1樓" data-floor="0">
+            <img id="schoolMap" src="SchoolMap_1F.png" alt="1樓" data-floor="0">
             <div id="hotspot1" class="hotspot" data-space="教務處" data-floor="0" data-original-x="213" data-original-y="355"></div>
 
             <img src="SchoolMap_2F.png" alt="2樓">
@@ -156,58 +156,34 @@ h1 {
         
         function showFloor(index) {
             images.forEach((img, i) => {
-            img.style.display = i === index ? "block" : "none";
+                img.style.display = i === index ? "block" : "none";
             });
-            
+    
             // 顯示對應樓層的熱區，隱藏其他樓層
             hotspots.forEach(hotspot => {
-                if (parseInt(hotspot.getAttribute("data-floor")) === index) {
+                const floor = parseInt(hotspot.getAttribute("data-floor"));
+                if (floor === index) {
                     hotspot.style.display = "block"; // 顯示該樓層熱區
+                    // 計算圖片的縮放比例
+                    const scaleX = images[index].clientWidth / originalWidth;
+                    const scaleY = images[index].clientHeight / originalHeight;
+            
+                    // 取得每個熱區的原始位置
+                    const originalX = parseFloat(hotspot.getAttribute('data-original-x'));
+                    const originalY = parseFloat(hotspot.getAttribute('data-original-y'));
+
+                    // 根據縮放比例調整熱區位置
+                    const adjustedX = originalX * scaleX;
+                    const adjustedY = originalY * scaleY;
+
+                    // 設置每個熱區的新位置
+                    hotspot.style.left = `${adjustedX}px`;
+                    hotspot.style.top = `${adjustedY}px`;
                 } else {
-                    hotspot.style.display = "none";  // 隱藏其他樓層的熱區
+                    hotspot.style.display = "none"; // 隱藏其他樓層的熱區
                 }
             });
         }
-
-window.addEventListener('load', function() {
-    const img = document.querySelector('.map-wrapper img');
-    const hotspots = document.querySelectorAll('.hotspot'); // 選取所有熱區
-    
-    // 這裡需要對應到圖片的原始大小
-    const originalWidth = 802;  // 例如圖片的原始寬度
-    const originalHeight = 449; // 例如圖片的原始高度
-    
-    // 計算圖片實際顯示尺寸的縮放比例
-    const scaleX = img.clientWidth / originalWidth;
-    const scaleY = img.clientHeight / originalHeight;
-
-    // 輸出縮放比例到控制台
-    console.log("scaleX:", scaleX);
-    console.log("scaleY:", scaleY);
-
-    hotspots.forEach(hotspot => {
-        // 取得每個熱區的原始位置
-        const originalX = parseFloat(hotspot.getAttribute('data-original-x'));
-        const originalY = parseFloat(hotspot.getAttribute('data-original-y'));
-
-        // 輸出每個熱區的原始位置
-        console.log(`Original X (id: ${hotspot.id}):`, originalX);
-        console.log(`Original Y (id: ${hotspot.id}):`, originalY);
-
-        // 根據縮放比例調整熱區位置
-        const adjustedX = originalX * scaleX;
-        const adjustedY = originalY * scaleY;
-
-        // 輸出每個熱區的調整後的位置
-        console.log(`Adjusted X (id: ${hotspot.id}):`, adjustedX);
-        console.log(`Adjusted Y (id: ${hotspot.id}):`, adjustedY);
-
-        // 設置每個熱區的新位置
-        hotspot.style.left = `${adjustedX}px`;
-        hotspot.style.top = `${adjustedY}px`;
-    });
-});
-
         
         // 測試切換樓層（可綁定按鈕事件）
         document.addEventListener("keydown", (event) => {
@@ -301,6 +277,7 @@ function showInfoBox(x, y, text) {
 function hideInfoBox() {
     document.getElementById("infoBox").style.display = "none";
 }
+});
 
     </script>
 
