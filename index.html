@@ -245,16 +245,31 @@
         }
 
         window.onload = function() {
+            console.log("頁面已載入");
+            updateHotspotPosition(); // 頁面載入時執行
+        }
+        function updateHotspotPosition(){
             const map = document.getElementById("map1");
             const hotspot = document.getElementById("hotspot1");
-            // 原始圖片大小
-            const originalWidth = 802;
-            const originalHeight = 449;
+            
             // 取得熱點原始座標
             const originalX = parseFloat(hotspot.dataset.x);
             const originalY = parseFloat(hotspot.dataset.y);
 
             map.onload = function () {
+                if (!map || !hotspot) {
+                    console.warn("找不到地圖或熱點元素！");
+                    return;
+                }
+
+                if (!map.complete) {
+                    console.log("圖片尚未載入完成，等待圖片載入...");
+                    map.onload = updateHotspotPosition;
+                    return;
+                }
+                // 原始圖片大小
+                const originalWidth = 802;
+                const originalHeight = 449;
                 const currentWidth = map.clientWidth;
                 const currentHeight = map.clientHeight;
                 // 計算縮放比例
