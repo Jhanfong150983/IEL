@@ -32,30 +32,12 @@
             align-items: center;                /* 布局模式-交叉軸水平置中 */
         }
             
-        .map1{
+        .map{
             width: 80%;
             height: auto;
             object-fit: contain;                /* 確保圖片等比例縮放並完整顯示 */
             border:2px solid black;             /* 邊框粗2px */
             #img2, #img3 {
-                display: none; /* 預設隱藏第二、三張圖 */
-            }
-        }
-        .map2{
-            width: 80%;
-            height: auto;
-            object-fit: contain;                /* 確保圖片等比例縮放並完整顯示 */
-            border:2px solid black;             /* 邊框粗2px */
-            #img1, #img3 {
-                display: none; /* 預設隱藏第二、三張圖 */
-            }
-        }
-        .map3{
-            width: 80%;
-            height: auto;
-            object-fit: contain;                /* 確保圖片等比例縮放並完整顯示 */
-            border:2px solid black;             /* 邊框粗2px */
-            #img1, #img2 {
                 display: none; /* 預設隱藏第二、三張圖 */
             }
         }
@@ -76,15 +58,32 @@
 <body>
     <h1>關埔國小資訊設備管理系統</h1>
     <div class = "map-container">
-        <button class = "button">⬅</button>
-        <img class = "map1" src="SchoolMap_1F.png" alt="1樓">
-        <img class = "map2" src="SchoolMap_2F.png" alt="2樓">
-        <img class = "map3" src="SchoolMap_3F.png" alt="3樓">
-        <button class = "button">➡</button>
+        <button class = "button" onclick = "prevmap()">⬅</button>
+        <img class = "map" src="SchoolMap_1F.png" alt="1樓">
+        <img class = "map" src="SchoolMap_2F.png" alt="2樓">
+        <img class = "map" src="SchoolMap_3F.png" alt="3樓">
+        <button class = "button" onclick = "nextmap()">➡</button>
     </div>
     
     <script>
-        // 這裡可以加入 JavaScript
+        const maps = ["SchoolMap_1F.png", "SchoolMap_2F.png", "SchoolMap_3F.png"];
+        let currentIndex = 0; // 當前圖片索引
+
+        function updateImage() {
+        document.getElementById("maps").src = maps[currentIndex];
+        }
+        function nextmap() {
+            if (currentIndex < maps.length - 1) {
+                currentIndex++;
+                updateImage();
+            }
+        }
+        function prevmap() {
+            if (currentIndex < maps.length - 1) {
+                currentIndex++;
+                updateImage();
+            }
+        }
     </script>
 </body>
 </html>
