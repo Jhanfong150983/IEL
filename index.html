@@ -71,6 +71,10 @@
 
         function updateImage() {
         document.getElementById("maps").src = maps[currentIndex];
+            for (let i = 0; i < maps.length; i++) {
+                maps[i].style.display = "none";
+            }
+            images[currentIndex].style.display = "block";
         }
         function nextmap() {
             if (currentIndex < maps.length - 1) {
