@@ -249,15 +249,23 @@ h1 {
         
         window.onload = function() {
             const img = document.getElementById('schoolMap');
+            if (img.complete) {
+                adjustHotspots();
+              } else {
+                img.onload = adjustHotspots;  // 如果圖片還沒加載完成，等待圖片加載完再執行
+              }
+        };
+
+        function adjustHotspots() {
+            const img = document.getElementById('schoolMap');
             const imgWidth = img.clientWidth;
             const imgHeight = img.clientHeight;
-
             hotspotList.forEach(hotspot => {
-              const topPercentage = hotspot.originalTop;
-              const leftPercentage = hotspot.originalLeft;
+            const topPercentage = hotspot.originalTop;
+            const leftPercentage = hotspot.originalLeft;
 
-              const topPosition = (topPercentage / 100) * imgHeight;
-              const leftPosition = (leftPercentage / 100) * imgWidth;
+            const topPosition = (topPercentage / 100) * imgHeight;
+            const leftPosition = (leftPercentage / 100) * imgWidth;
 
             const element = document.querySelector(hotspot.element);
               element.style.top = `${topPosition}px`;
