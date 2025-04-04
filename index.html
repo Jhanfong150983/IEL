@@ -249,27 +249,37 @@ h1 {
         
         window.onload = function() {
           const img = document.getElementById('schoolMap');
-          const imgWidth = img.naturalWidth;  // 圖片的原始寬度
-          const imgHeight = img.naturalHeight;  // 圖片的原始高度
-          const imgDisplayWidth = img.clientWidth;  // 圖片顯示的寬度
-          const imgDisplayHeight = img.clientHeight;  // 圖片顯示的高度
 
-          // 計算顯示比例
-          const scaleX = imgDisplayWidth / imgWidth;
-          const scaleY = imgDisplayHeight / imgHeight;
+          // 等待圖片加載完成
+          img.onload = function() {
+            adjustHotspots();
+          };
 
-          // 更新熱點位置
+          // 如果圖片已經加載完成，直接執行
+          if (img.complete) {
+            adjustHotspots();
+          }
+        };
+
+        function adjustHotspots() {
+          const img = document.getElementById('schoolMap');
+          const imgWidth = img.naturalWidth;  // 原始圖片寬度
+          const imgHeight = img.naturalHeight;  // 原始圖片高度
+
+          // 遍歷熱點列表，根據圖片尺寸計算熱點的百分比
           hotspotList.forEach(hotspot => {
-            const topPosition = (hotspot.originalTop * scaleY);
-            const leftPosition = (hotspot.originalLeft * scaleX);
+            // 計算百分比位置
+            const topPercentage = (hotspot.originalTop / imgHeight) * 100;  // 計算垂直百分比
+            const leftPercentage = (hotspot.originalLeft / imgWidth) * 100;  // 計算水平百分比
 
+            // 根據百分比設置熱點位置
             const element = document.querySelector(hotspot.element);
             if (element) {
-              element.style.top = `${topPosition}px`;
-              element.style.left = `${leftPosition}px`;
+              element.style.top = `${topPercentage}%`;  // 使用百分比設置熱點的垂直位置
+              element.style.left = `${leftPercentage}%`;  // 使用百分比設置熱點的水平位置
             }
           });
-        };
+        }
 
 
 
