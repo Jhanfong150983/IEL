@@ -51,7 +51,11 @@
             border: none;                        /* 邊框無*/
             cursor: pointer;                     /* 游標便手指頭 */
         }
-
+        
+        /* 資料顯示區塊 */
+        .data-container{
+            width: 100vw;
+            height: 30hw;
     </style>
 </head>
 
@@ -64,7 +68,9 @@
         <img id = "map3" class = "map" src="SchoolMap_3F.png" alt="3樓" style="display: none;">
         <button class = "button" onclick = "nextmap()">➡</button>
     </div>
-    
+    <div class = "data-container">
+        
+    </div>
     <script>
         const maps = ["map1", "map2", "map3"];
         let currentIndex = 0; // 當前圖片索引
