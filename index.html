@@ -122,8 +122,10 @@
         }
 
         .hotspot {
-            outline: 2px solid red; /* 熱點區域的邊框 */
-            opacity: 0.5;  /* 熱點的透明度 */
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 0, 0, 0.5); /* 半透明紅色背景 */
+            opacity: 0.5; /* 初始透明度 */
         }
         .hotspot:hover {
             opacity: 1;    /* 滑鼠懸停時，熱點變成不透明 */
@@ -137,7 +139,7 @@
     <div class = "map-container">
         <button class = "button" onclick = "prevmap()">⬅</button>
         <img id = "map1" class = "map" src="SchoolMap_1F.png" alt="1樓">
-        <area class="hotspot" shape="circle" coords="722.34,1271.72,300" href="#" alt="熱點1" >
+        <div area class="hotspot" shape="circle" coords="722.34,1271.72,300" href="#" alt="熱點1" ></div>
         <img id = "map2" class = "map" src="SchoolMap_2F.png" alt="2樓" style="display: none;">
         <img id = "map3" class = "map" src="SchoolMap_3F.png" alt="3樓" style="display: none;">
         <button class = "button" onclick = "nextmap()">➡</button>
