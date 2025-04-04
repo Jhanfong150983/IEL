@@ -73,7 +73,73 @@
         <button class = "button" onclick = "nextmap()">➡</button>
     </div>
     <div class = "data-container">
-        
+        <div class="classroom-info">
+            <h2>教室資訊設備詳細資訊</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>序次</th>
+                        <th>資訊設備類別</th>
+                        <th>資訊設備名稱</th>
+                        <th>使用到期年限</th>
+                        <th>到期與否</th>
+                        <th>備註</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 範例資料行 -->
+                    <tr>
+                        <td>1</td>
+                        <td>電腦</td>
+                        <td>桌面電腦</td>
+                        <td>2026</td>
+                        <td>否</td>
+                        <td>需升級</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>投影機</td>
+                        <td>投影機X</td>
+                        <td>2025</td>
+                        <td>是</td>
+                        <td>待更換</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <!-- 全校資訊設備統計區塊 -->
+        <div class="school-stats">
+            <h2>全校資訊設備統計</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>序次</th>
+                        <th>資訊設備類別</th>
+                        <th>資訊設備名稱</th>
+                        <th>資訊設備數量</th>
+                        <th>使用到期數量</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 範例資料行 -->
+                    <tr>
+                        <td>1</td>
+                        <td>電腦</td>
+                        <td>桌面電腦</td>
+                        <td>50</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>投影機</td>
+                        <td>投影機X</td>
+                        <td>20</td>
+                        <td>5</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <script>
         const maps = ["map1", "map2", "map3"];
