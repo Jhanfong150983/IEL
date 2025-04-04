@@ -31,12 +31,16 @@
             justify-content: center;            /* 布局模式-主軸置中對齊 */
             align-items: center;                /* 布局模式-交叉軸水平置中 */
         }
+            
+        .map{
+            border:2px solid black;             /* 邊框粗2px */
+        }
 
         /* 按鈕樣式 */
         .button{
             background-color: rgba(0, 0, 0, 0.5);/* 背景顏色 */
             color: white;                        /* 元素顏色 */
-            border: none;                        /* 邊框 */
+            border: none;                        /* 邊框無*/
             cursor: pointer;                     /* 游標便手指頭 */
             height: 100%
         }
@@ -47,9 +51,9 @@
 <body>
     <h1>關埔國小資訊設備管理系統</h1>
     <div class = "map-container">
-        <button class = "button">◀️</button>
+        <button class = "button">⬅</button>
         <img src="SchoolMap_1F.png" alt="1樓">
-        <button class = "button">▶️</button>
+        <button class = "button">➡</button>
     </div>
     
     <script>
