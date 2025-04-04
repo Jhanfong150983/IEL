@@ -43,12 +43,11 @@
         }
         .image-container {
             position: relative; /* 確保熱點在圖片上方顯示 */
+            display: inline-block;
         }
             
         .map{
             margin: 2px;
-            top: 20px;  /* 偏移一下來測試 */
-            left: 20px; /* 偏移一下來測試 */
             width: 100%;
             height: 100%;
             max-width: 100%;
@@ -148,10 +147,12 @@
     <h1>關埔國小資訊設備管理系統</h1>
     <div class = "map-container">
         <button class = "button" onclick = "prevmap()">⬅</button>
-        <img id = "map1" class = "map" src="SchoolMap_1F.png" alt="1樓">
-        <div id = "hotspot1" class="hotspot" style="top: 214px; left: 352px;" alt="教務處"></div>
-        <img id = "map2" class = "map" src="SchoolMap_2F.png" alt="2樓" style="display: none;">
-        <img id = "map3" class = "map" src="SchoolMap_3F.png" alt="3樓" style="display: none;">
+        <div class="image-container">
+            <img id = "map1" class = "map" src="SchoolMap_1F.png" alt="1樓">
+            <div id = "hotspot1" class="hotspot" style="top: 214px; left: 352px;" alt="教務處"></div>
+            <img id = "map2" class = "map" src="SchoolMap_2F.png" alt="2樓" style="display: none;">
+            <img id = "map3" class = "map" src="SchoolMap_3F.png" alt="3樓" style="display: none;">
+        </div>
         <button class = "button" onclick = "nextmap()">➡</button>
     </div>
     <div class = "data-container">
