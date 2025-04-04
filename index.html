@@ -24,12 +24,10 @@ body {
 h1 {
     margin: 10px 0;
     font-size: 1.5rem;
-    height: 60px; /* 設定標題的固定高度 */
 }
 
 .map-container {
     width: 100vw;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,7 +38,6 @@ h1 {
 .map-wrapper {
     position: relative; /* 讓 .hotspot 依照這個為基準 */
     width: 100%; /* 讓內部圖片決定寬度 */
-    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,8 +47,6 @@ h1 {
 }
 
 .map-wrapper img {
-    width: 100%;  /* 讓圖片寬度比原始大 20% */
-    
     object-fit: contain; /* 保持圖片比例不失真 */
     display: block;
     transition: transform 0.3s ease-in-out;
