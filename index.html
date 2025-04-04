@@ -169,33 +169,30 @@ h1 {
             });
         }
 
-        window.onload = adjustHotspots;
-        window.onresize = adjustHotspots;
+        window.addEventListener('load', function() {
+            const img = document.querySelector('.map-wrapper img');
+            const hotspot = document.querySelector('.hotspot');
+    
+            // 這裡需要對應到圖片的原始大小
+            const originalWidth = 802;  // 例如圖片的原始寬度
+            const originalHeight = 449; // 例如圖片的原始高度
+    
+            // 計算圖片實際顯示尺寸的縮放比例
+            const scaleX = img.clientWidth / originalWidth;
+            const scaleY = img.clientHeight / originalHeight;
 
-        function adjustHotspots() {
-            const img = document.getElementById('schoolMap');
-            const wrapper = document.querySelector('.map-wrapper');
-            const hotspots = document.querySelectorAll('.hotspot');
+            // 取得熱區的原始位置
+            const originalX = parseFloat(hotspot.getAttribute('data-original-x'));
+            const originalY = parseFloat(hotspot.getAttribute('data-original-y'));
 
-            if (!img.complete) return;
+            // 根據縮放比例調整熱區位置
+            const adjustedX = originalX * scaleX;
+            const adjustedY = originalY * scaleY;
 
-            // 確保圖片已經載入，並取得顯示大小
-            const imgWidth = img.clientWidth;
-            const imgHeight = img.clientHeight;
-
-            hotspots.forEach(hotspot => {
-                const originalX = parseFloat(hotspot.dataset.originalX); // 802px 對應的 X
-                const originalY = parseFloat(hotspot.dataset.originalY); // 449px 對應的 Y
-
-                // 計算在當前顯示大小下的位置
-                const leftPosition = (originalX / 802) * imgWidth;
-                const topPosition = (originalY / 449) * imgHeight;
-
-                // 設定座標
-                hotspot.style.left = `${leftPosition}px`;
-                hotspot.style.top = `${topPosition}px`;
-            });
-        }
+            // 設置熱區的新位置
+            hotspot.style.left = `${adjustedX}px`;
+            hotspot.style.top = `${adjustedY}px`;
+        });
         
         // 測試切換樓層（可綁定按鈕事件）
         document.addEventListener("keydown", (event) => {
